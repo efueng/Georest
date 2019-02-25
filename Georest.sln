@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Georest.Api", "src\Georest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Georest.Domain", "src\Georest.Domain\Georest.Domain.csproj", "{4A643065-F9CB-4208-877F-2736B8E37F91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Georest.Web", "src\Georest.Web\Georest.Web.csproj", "{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +48,22 @@ Global
 		{4A643065-F9CB-4208-877F-2736B8E37F91}.Release|x64.Build.0 = Release|Any CPU
 		{4A643065-F9CB-4208-877F-2736B8E37F91}.Release|x86.ActiveCfg = Release|Any CPU
 		{4A643065-F9CB-4208-877F-2736B8E37F91}.Release|x86.Build.0 = Release|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Debug|x64.Build.0 = Debug|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Debug|x86.Build.0 = Debug|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Release|x64.ActiveCfg = Release|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Release|x64.Build.0 = Release|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Release|x86.ActiveCfg = Release|Any CPU
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4DEDD8F5-6C71-4F69-9114-814FC48FF350} = {05604DE7-2729-48D4-BDA6-AB11914B13D7}
 		{4A643065-F9CB-4208-877F-2736B8E37F91} = {05604DE7-2729-48D4-BDA6-AB11914B13D7}
+		{4D6B3D4D-740F-4999-A0AE-EAB9989A761B} = {05604DE7-2729-48D4-BDA6-AB11914B13D7}
 	EndGlobalSection
 EndGlobal

@@ -104,8 +104,9 @@ namespace Georest.Api.Controllers
             //model = TryImportLabViewModel();
             User user = HttpContext.Session.Get<User>("User");
             //User user = Session["User"] as User;
-            user.CurrentLabState = model;
-            return View(user);
+            //user.CurrentLabState = model;
+            //return View(user);
+            return null;
         }
     }
 }
