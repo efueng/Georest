@@ -4,7 +4,13 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
         <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+        <TypeScriptToolsVersion>3.3</TypeScriptToolsVersion>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\js\LabDirectory.js" />
+      <Content Remove="wwwroot\js\LabUtils.js" />
+    </ItemGroup>
     
     <ItemGroup>
         <None Remove="scripts\main.ts" />
@@ -12,12 +18,14 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.App"/>
-        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     </ItemGroup>
     
     <ItemGroup>
         <TypeScriptCompile Include="scripts\main.ts" />
+        <TypeScriptCompile Include="wwwroot\js\LabDirectory.js" />
+        <TypeScriptCompile Include="wwwroot\js\LabUtils.js" />
     </ItemGroup>
 
 </Project>
