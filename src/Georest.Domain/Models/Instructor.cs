@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Georest.Domain.Models
 {
-    public class User : Entity
+    public class Instructor : Entity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
