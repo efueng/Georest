@@ -14,32 +14,32 @@ namespace Georest.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LabController : ControllerBase
+    public class LabsController : ControllerBase
     {
         private IMapper Mapper { get; set; }
         private ILabService LabService { get; set; }
         private string IsOverridden { get; set; } = "false";
         private string LabKey { get; set; } = "Lab1Key";
 
-        public LabController(ILabService labService, IMapper mapper)
+        public LabsController(ILabService labService, IMapper mapper)
         {
             Mapper = mapper;
             LabService = labService;
         }
 
         // GET: api/Lab
-        [HttpGet]
-        [Produces(typeof(ICollection<LabViewModel>))]
-        public IActionResult Get()
-        {
-            return Created(nameof(Get), LabService.FetchAlLabs().ToList());
-        }
+        //[HttpGet]
+        //[Produces(typeof(ICollection<LabViewModel>))]
+        //public IActionResult GetInstructorById()
+        //{
+        //    return Created(nameof(GetInstructorById), LabService.FetchAlLabs().ToList());
+        //}
 
-        // GET: api/Lab/5
-        [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(int id)
+        // GET: api/Labs/5
+        [HttpGet("{id}", Name = "GetLabById")]
+        public async Task<IActionResult> GetLabById(int id)
         {
-            var fetchedLab = LabService.GetById(id);
+            Lab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
             if (fetchedLab == null)
             {
                 return NotFound();
@@ -48,48 +48,48 @@ namespace Georest.Api.Controllers
             return Ok(Mapper.Map<LabViewModel>(fetchedLab));
         }
 
-        // POST: api/Lab
+        // POST: api/Labs
         [HttpPost]
-        public IActionResult Post(LabViewModel viewModel)
+        public async Task<IActionResult> AddLab(LabViewModel viewModel)
         {
             if (viewModel == null)
             {
                 return BadRequest();
             }
 
-            var createdLab = LabService.AddLab(Mapper.Map<Lab>(viewModel));
-            return CreatedAtAction(nameof(Post), new {id = createdLab.Id}, Mapper.Map<LabViewModel>(createdLab));
+            Lab createdLab = await LabService.AddLab(Mapper.Map<Lab>(viewModel)).ConfigureAwait(false);
+            return CreatedAtAction(nameof(AddLab), new {id = createdLab.Id}, Mapper.Map<LabViewModel>(createdLab));
         }
 
-        // PUT: api/Lab/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, LabInputViewModel viewModel)
+        // PUT: api/Labs/5
+        [HttpPut("{id}", Name = "UpdateLab")]
+        public async Task<IActionResult> UpdateLab(int id, LabInputViewModel viewModel)
         {
             if (viewModel == null)
             {
                 return BadRequest();
             }
-            var fetchedLab = LabService.GetById(id);
+            Lab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
             if (fetchedLab == null)
             {
                 return NotFound();
             }
 
             Mapper.Map(viewModel, fetchedLab);
-            LabService.UpdateLab(fetchedLab);
+            await LabService.UpdateLab(fetchedLab).ConfigureAwait(false);
             return NoContent();
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}", Name = "DeleteLab")]
+        public async Task<IActionResult> DeleteLab(int id)
         {
             if (id <= 0)
             {
                 return BadRequest("A Lab id must be specified");
             }
 
-            if (LabService.DeleteLab(id))
+            if (await LabService.DeleteLab(id).ConfigureAwait(false))
             {
                 return Ok();
             }

@@ -16,5 +16,7 @@ namespace Georest.Domain.Models
         public bool IsPublished { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime PublishedOn { get; set; }
+        public List<Exercise> Exercises { get; set; }
+        public List<Response> Responses { get; set; }
     }
 }

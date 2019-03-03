@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
 
@@ -49,12 +50,19 @@ namespace Georest.Api
             });
 
             services.AddDistributedMemoryCache();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider()
+                .AddJsonOptions(options => 
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
+
             services.AddAntiforgery(options => options.HeaderName = "XSRF-TOKEN");
             services.AddAntiforgery(options => options.SuppressXFrameOptionsHeader = true);
 
             services.AddScoped<ILabService, LabService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IInstructorService, InstructorService>();
+            
 
             services.AddDbContext<ApplicationDbContext>(builder =>
             {
@@ -78,7 +86,7 @@ namespace Georest.Api
             var assemblies = dependencyContext.RuntimeLibraries.SelectMany(lib =>
                 lib.GetDefaultAssemblyNames(dependencyContext)
                     .Where(a => a.Name.Contains("Georest")).Select(Assembly.Load)).ToArray();
-            //services.AddAutoMapper(assemblies);
+            services.AddAutoMapper(assemblies);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +102,8 @@ namespace Georest.Api
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -104,7 +114,6 @@ namespace Georest.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

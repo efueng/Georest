@@ -1,8 +1,99 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Georest.Web.Models.User
+@{
+    ViewBag.Title = "Connect to Canvas";
+    //Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width" />
+    <title>MyView</title>
+    <script>
+        function check()/*function to check userid & password*/ {
+            /*
+            the following code checkes whether the entered userid and password are matching
+            */
+            var EWUid = $('#EWUid').val();
+            var pw = $('#Password').val();
+            var la = $('#LoginAs').val();
+            var loginData = JSON.stringify({
+                EWUid: EWUid,
+                Password: pw,
+                UserType: la
+            });
+            //alert(loginData);
+
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '@Url.Action("OnPostSend", @ViewContext.RouteData.Values["controller"].ToString())',
+                data: loginData,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: function (response) {
+                    //alert(response);
+
+                    if (response == "Student") {
+                        location.assign('/Lab/LabDirectoryView');
+                    }
+                    else if (response == "Administrator") {
+                        location.assign('/Lab/LabManagerView');
+                    }
+                },
+                error: function (response) {
+                    alert("Error: Username or Password is incorrect (" + response + ")");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <form name="loginForm" onsubmit="return check(this);">
+        <div class="container-fluid">
+            <div class="row">
+                <div align="right" class="col-xs-6">
+                    <label for='EWUid'>EWU id:</label>
+
+                </div>
+                <div class="col-xs-6">
+                    <input id="EWUid" type="text" />
+                </div>
+            </div>
+            <div class="row">
+                <div align="right" class="col-xs-6">
+                    <label for='Password'>Password:</label>
+                </div>
+                <div class="col-xs-6">
+                    <input id="Password" type="password" />
+                </div>
+            </div>
+
+            <!--Remove "Login as" after getting SSO acess-->
+            <div class="row">
+                <div align="right" class="col-xs-6">
+                    <label for='Admin'>Login as:</label>
+                </div>
+                <div class="col-xs-6">
+                    <select id="LoginAs">
+                        <option> Administrator</option>
+                        <option> Student </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div align="center">
+            <Submit id="Submit" class="btn btn-success" onclick="check()" value="Login">Login</Submit>
+        </div>
+
+    </form>
+</body>
+</html>

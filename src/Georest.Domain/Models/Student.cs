@@ -12,5 +12,7 @@ namespace Georest.Domain.Models
         public Section Section { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public List<Lab> Labs { get; set; }
     }
 }

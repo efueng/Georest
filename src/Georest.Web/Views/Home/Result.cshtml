@@ -1,0 +1,15 @@
+﻿@model Geolabs_Core.Models.ResultModel
+
+@{
+    ViewBag.Title = "Response";
+}
+
+<h2>@Model.Title</h2>
+
+<div>
+    <hr />
+    <p>
+        @Model.Message<br />
+        <a href=@Model.Link target="_blank">@Model.LinkTitle</a>
+    </p>
+</div>

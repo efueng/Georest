@@ -12,6 +12,7 @@ namespace Georest.Domain.Services.Interfaces
         Task<Lab> AddLab(Lab lab);
         Task<Lab> GetById(int labId);
         Task<bool> DeleteLab(int labId);
-        Task<Lab> GetLabsForStudent(int studentId);
+        Task<List<Lab>> GetLabsForStudent(int studentId);
+        Task<Lab> UpdateLab(Lab lab);
     }
 }

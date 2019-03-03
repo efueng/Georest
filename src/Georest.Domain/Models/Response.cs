@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Georest.Domain.Models
 {
-    class Response
+    public class Response : Entity
     {
+        public string Body { get; set; }
     }
 }
