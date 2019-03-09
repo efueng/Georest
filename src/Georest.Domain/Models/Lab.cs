@@ -9,14 +9,25 @@ namespace Georest.Domain.Models
     public class Lab : Entity
     {
         [Required]
-        public string Title { get; set; }
-        public int InstructorId { get; set; }
-        [ForeignKey("InstructorId")]
-        public Instructor Instructor { get; set; }
+        public string Title
+        {
+            get => _Title;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Title of lab is invalid.", nameof(value));
+                }
+
+                value = value.Trim();
+                _Title = value;
+            }
+        }
+        private string _Title;
+
         public bool IsPublished { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime PublishedOn { get; set; }
         public List<Exercise> Exercises { get; set; }
-        public List<Response> Responses { get; set; }
     }
 }

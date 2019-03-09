@@ -14,14 +14,14 @@ namespace Georest.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LabsController : ControllerBase
+    public class StudentLabsController : ControllerBase
     {
         private IMapper Mapper { get; set; }
-        private ILabService LabService { get; set; }
+        private IStudentLabService LabService { get; set; }
         private string IsOverridden { get; set; } = "false";
         private string LabKey { get; set; } = "Lab1Key";
 
-        public LabsController(ILabService labService, IMapper mapper)
+        public StudentLabsController(IStudentLabService labService, IMapper mapper)
         {
             Mapper = mapper;
             LabService = labService;
@@ -29,47 +29,47 @@ namespace Georest.Api.Controllers
 
         // GET: api/Lab
         //[HttpGet]
-        //[Produces(typeof(ICollection<LabViewModel>))]
+        //[Produces(typeof(ICollection<InstructorLabViewModel>))]
         //public IActionResult GetInstructorById()
         //{
-        //    return Created(nameof(GetInstructorById), LabService.FetchAlLabs().ToList());
+        //    return Created(nameof(GetInstructorById), StudentLabService.FetchAlLabs().ToList());
         //}
 
         // GET: api/Labs/5
         [HttpGet("{id}", Name = "GetLabById")]
         public async Task<IActionResult> GetLabById(int id)
         {
-            Lab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
+            StudentLab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
             if (fetchedLab == null)
             {
                 return NotFound();
             }
 
-            return Ok(Mapper.Map<LabViewModel>(fetchedLab));
+            return Ok(Mapper.Map<InstructorLabViewModel>(fetchedLab));
         }
 
         // POST: api/Labs
         [HttpPost]
-        public async Task<IActionResult> AddLab(LabViewModel viewModel)
+        public async Task<IActionResult> AddLab(StudentLabViewModel viewModel)
         {
             if (viewModel == null)
             {
                 return BadRequest();
             }
 
-            Lab createdLab = await LabService.AddLab(Mapper.Map<Lab>(viewModel)).ConfigureAwait(false);
-            return CreatedAtAction(nameof(AddLab), new {id = createdLab.Id}, Mapper.Map<LabViewModel>(createdLab));
+            StudentLab createdLab = await LabService.AddLab(Mapper.Map<StudentLab>(viewModel)).ConfigureAwait(false);
+            return CreatedAtAction(nameof(AddLab), new {id = createdLab.Id}, Mapper.Map<StudentLabViewModel>(createdLab));
         }
 
         // PUT: api/Labs/5
         [HttpPut("{id}", Name = "UpdateLab")]
-        public async Task<IActionResult> UpdateLab(int id, LabInputViewModel viewModel)
+        public async Task<IActionResult> UpdateLab(int id, InstructorLabInputViewModel viewModel)
         {
             if (viewModel == null)
             {
                 return BadRequest();
             }
-            Lab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
+            StudentLab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
             if (fetchedLab == null)
             {
                 return NotFound();
@@ -97,16 +97,16 @@ namespace Georest.Api.Controllers
             return NotFound();
         }
 
-        public ActionResult LabEditorView(string id)
-        {
-            LabKey = id;
-            LabViewModel model;
-            //model = TryImportLabViewModel();
-            User user = HttpContext.Session.Get<User>("User");
-            //User user = Session["User"] as User;
-            //user.CurrentLabState = model;
-            //return View(user);
-            return null;
-        }
+        //public ActionResult LabEditorView(string id)
+        //{
+        //    LabKey = id;
+        //    InstructorLabViewModel model;
+        //    //model = TryImportLabViewModel();
+        //    User user = HttpContext.Session.Get<User>("User");
+        //    //User user = Session["User"] as User;
+        //    //user.CurrentLabState = model;
+        //    //return View(user);
+        //    return null;
+        //}
     }
 }

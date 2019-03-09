@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Georest.Domain.Services
 {
-    public class LabService : ILabService
+    public class InstructorLabService : IInstructorLabService
     {
         private ApplicationDbContext DbContext { get; }
-        public LabService(ApplicationDbContext dbContext)
+        public InstructorLabService(ApplicationDbContext dbContext)
         {
             DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
-        public async Task<Lab> AddLab(Lab lab)
+        public async Task<InstructorLab> AddLab(InstructorLab lab)
         {
             if (lab == null) throw new ArgumentNullException(nameof(lab));
 
-            DbContext.Labs.Add(lab);
+            DbContext.InstructorLabs.Add(lab);
             await DbContext.SaveChangesAsync().ConfigureAwait(false);
 
             return lab;
@@ -28,11 +28,11 @@ namespace Georest.Domain.Services
 
         public async Task<bool> DeleteLab(int labId)
         {
-            Lab labToDelete = await DbContext.Labs.FindAsync(labId).ConfigureAwait(false);
+            InstructorLab labToDelete = await DbContext.InstructorLabs.FindAsync(labId).ConfigureAwait(false);
 
             if (labToDelete == null)
             {
-                DbContext.Labs.Remove(labToDelete);
+                DbContext.InstructorLabs.Remove(labToDelete);
                 DbContext.SaveChanges();
 
                 return true;
@@ -41,25 +41,25 @@ namespace Georest.Domain.Services
             return false;
         }
 
-        public async Task<Lab> GetById(int labId)
+        public async Task<InstructorLab> GetById(int labId)
         {
-            Lab fetchedLab = await DbContext.Labs.SingleOrDefaultAsync(lab => lab.Id == labId).ConfigureAwait(false);
+            InstructorLab fetchedLab = await DbContext.InstructorLabs.SingleOrDefaultAsync(lab => lab.Id == labId).ConfigureAwait(false);
 
             return fetchedLab;
         }
 
-        public async Task<List<Lab>> GetLabsForStudent(int studentId)
+        public async Task<ICollection<InstructorLab>> GetLabsForInstructor(int instructorId)
         {
-            return (await DbContext.Students.FindAsync(studentId).ConfigureAwait(false)).Labs;
+            return (await DbContext.Instructors.FindAsync(instructorId).ConfigureAwait(false)).Labs;
 
             //return await DbContext.Labs.Where(lab => lab.s)
         }
 
-        public async Task<Lab> UpdateLab(Lab lab)
+        public async Task<InstructorLab> UpdateLab(InstructorLab lab)
         {
             if (lab == null) throw new ArgumentNullException(nameof(lab));
 
-            DbContext.Labs.Update(lab);
+            DbContext.InstructorLabs.Update(lab);
             await DbContext.SaveChangesAsync().ConfigureAwait(false);
 
             return lab;

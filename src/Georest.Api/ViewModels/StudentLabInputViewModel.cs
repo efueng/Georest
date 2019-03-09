@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Georest.Api.ViewModels
 {
-    public class LabInputViewModel
+    public class StudentLabInputViewModel
     {
-        public string Name { get; set; }
-        public string LabID { get; set; }
+        [Required]
+        public string Title { get; set; }
         public string DateTimeCreated { get; set; }
         public string DateTimePublished { get; set; }
         public bool IsPublished { get; set; }

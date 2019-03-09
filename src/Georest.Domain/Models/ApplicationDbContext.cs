@@ -6,9 +6,11 @@ namespace Georest.Domain.Models
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
-        public DbSet<Lab> Labs { get; set; }
+        public DbSet<InstructorLab> InstructorLabs { get; set; }
+        public DbSet<StudentLab> StudentLabs { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<Response> Responses { get; set; }
+        public DbSet<InstructorResponse> InstructorResponses { get; set; }
+        public DbSet<StudentResponse> StudentResponses { get; set; }
         public DbSet<Section> Sections { get; set; }
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { }

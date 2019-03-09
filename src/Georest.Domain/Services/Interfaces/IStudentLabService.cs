@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Georest.Domain.Services.Interfaces
 {
-    public interface ILabService
+    public interface IStudentLabService
     {
-        Task<Lab> AddLab(Lab lab);
-        Task<Lab> GetById(int labId);
+        Task<StudentLab> AddLab(StudentLab lab);
+        Task<StudentLab> GetById(int labId);
         Task<bool> DeleteLab(int labId);
-        Task<List<Lab>> GetLabsForStudent(int studentId);
-        Task<Lab> UpdateLab(Lab lab);
+        Task<ICollection<StudentLab>> GetLabsForStudent(int studentId);
+        Task<StudentLab> UpdateLab(StudentLab lab);
     }
 }

@@ -9,9 +9,9 @@ namespace Georest.Domain.Services.Interfaces
     public interface IInstructorService
     {
         Task<Instructor> AddInstructor(Instructor instructor);
-        Task<Instructor> GetById(int studentId);
-        Task<bool> DeleteInstructor(int studentId);
+        Task<Instructor> GetById(int intstructorId);
+        Task<bool> DeleteInstructor(int intstructorId);
         Task<List<Instructor>> GetAllInstructors();
-        Task<Instructor> UpdateInstructor(Instructor student);
+        Task<Instructor> UpdateInstructor(Instructor intstructor);
     }
 }

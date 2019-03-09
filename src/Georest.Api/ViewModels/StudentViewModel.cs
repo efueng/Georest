@@ -7,6 +7,8 @@ namespace Georest.Api.ViewModels
 {
     public class StudentViewModel
     {
+        public int StudentId { get; set; }
+        public int SectionId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }

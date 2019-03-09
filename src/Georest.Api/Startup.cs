@@ -38,11 +38,6 @@ namespace Georest.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
-            });
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => false;
@@ -50,6 +45,7 @@ namespace Georest.Api
             });
 
             services.AddDistributedMemoryCache();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider()
                 .AddJsonOptions(options => 
                 {
@@ -59,14 +55,19 @@ namespace Georest.Api
             services.AddAntiforgery(options => options.HeaderName = "XSRF-TOKEN");
             services.AddAntiforgery(options => options.SuppressXFrameOptionsHeader = true);
 
-            services.AddScoped<ILabService, LabService>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentLabService, StudentLabService>();
+            services.AddScoped<IStudentResponseService, StudentResponseService>();
             services.AddScoped<IInstructorService, InstructorService>();
+            services.AddScoped<IInstructorLabService, InstructorLabService>();
+            services.AddScoped<IInstructorResponseService, InstructorResponseService>();
+            services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<ISectionService, SectionService>();
             
 
             services.AddDbContext<ApplicationDbContext>(builder =>
             {
-                builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                builder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -75,15 +76,15 @@ namespace Georest.Api
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
-            services.AddSession(options =>
-            {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(60);
-                options.Cookie.HttpOnly = true;
-            });
+            //services.AddSession(options =>
+            //{
+            //    // Set a short timeout for easy testing.
+            //    options.IdleTimeout = TimeSpan.FromSeconds(60);
+            //    options.Cookie.HttpOnly = true;
+            //});
 
-            var dependencyContext = DependencyContext.Default;
-            var assemblies = dependencyContext.RuntimeLibraries.SelectMany(lib =>
+            DependencyContext dependencyContext = DependencyContext.Default;
+            Assembly[] assemblies = dependencyContext.RuntimeLibraries.SelectMany(lib =>
                 lib.GetDefaultAssemblyNames(dependencyContext)
                     .Where(a => a.Name.Contains("Georest")).Select(Assembly.Load)).ToArray();
             services.AddAutoMapper(assemblies);
@@ -111,7 +112,7 @@ namespace Georest.Api
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
             });
 
             app.UseMvc();
