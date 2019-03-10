@@ -38,13 +38,13 @@ namespace Georest.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    options.CheckConsentNeeded = context => false;
+            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //});
 
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider()
                 .AddJsonOptions(options => 
@@ -112,7 +112,7 @@ namespace Georest.Api
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
             app.UseMvc();

@@ -25,17 +25,17 @@ namespace Georest.Api.Controllers
             StudentService = studentService;
         }
 
-        // GET: api/Student
-        //[HttpGet]
-        //[Produces(typeof(ICollection<StudentViewModel>))]
-        //public IActionResult GetInstructorById()
-        //{
-        //    return Created(nameof(GetInstructorById), StudentService.FetchAlStudents().ToList());
-        //}
+        // GET api/Students
+        [HttpGet]
+        public async Task<ActionResult<ICollection<StudentViewModel>>> GetAllStudents()
+        {
+            var students = await StudentService.GetAllStudents();
+            return Ok(students.Select(x => Mapper.Map<StudentViewModel>(x)));
+        }
 
         // GET: api/Students/5
-        [HttpGet("{id}", Name = "Get")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Get(int id)
         {
             Student fetchedStudent = await  StudentService.GetById(id).ConfigureAwait(false);
             if (fetchedStudent == null)
@@ -48,7 +48,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/Students
         [HttpPost]
-        public async Task<IActionResult> Post(StudentViewModel viewModel)
+        public async Task<ActionResult> Post(StudentViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -61,7 +61,7 @@ namespace Georest.Api.Controllers
 
         // PUT: api/Students/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, StudentInputViewModel viewModel)
+        public async Task<ActionResult> Put(int id, StudentInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -78,9 +78,9 @@ namespace Georest.Api.Controllers
             return NoContent();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Students/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             if (id <= 0)
             {

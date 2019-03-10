@@ -25,17 +25,16 @@ namespace Georest.Api.Controllers
             InstructorService = instructorService;
         }
 
-        // GET: api/Instructor
-        //[HttpGet]
-        //[Produces(typeof(ICollection<InstructorViewModel>))]
-        //public IActionResult GetInstructorById()
-        //{
-        //    return Created(nameof(GetInstructorById), InstructorService.FetchAlInstructors().ToList());
-        //}
+        // GET api/Instructors
+        [HttpGet]
+        public async Task<ActionResult<ICollection<InstructorViewModel>>> GetAllInstructors()
+        {
+            var instructors = await InstructorService.GetAllInstructors();
+            return Ok(instructors.Select(x => Mapper.Map<InstructorViewModel>(x)));
+        }
 
-        // GET: api/Instructors/5
-        [HttpGet("{id}", Name = "GetInstructorById")]
-        public async Task<IActionResult> GetInstructorById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetInstructorById(int id)
         {
             Instructor fetchedInstructor = await InstructorService.GetById(id).ConfigureAwait(false);
             if (fetchedInstructor == null)
@@ -48,7 +47,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/Instructors
         [HttpPost]
-        public async Task<IActionResult> AddInstructor(InstructorViewModel viewModel)
+        public async Task<ActionResult<InstructorViewModel>> AddInstructor(InstructorViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -60,8 +59,8 @@ namespace Georest.Api.Controllers
         }
 
         // PUT: api/Instructors/5
-        [HttpPut("{id}", Name = "UpdateInstructor")]
-        public async Task<IActionResult> UpdateInstructor(int id, InstructorInputViewModel viewModel)
+        [HttpPut]
+        public async Task<ActionResult> UpdateInstructor(int id, InstructorInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -78,9 +77,9 @@ namespace Georest.Api.Controllers
             return NoContent();
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}", Name = "DeleteInstructor")]
-        public async Task<IActionResult> DeleteInstructor(int id)
+        // DELETE: api/Instructors/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteInstructor(int id)
         {
             if (id <= 0)
             {
