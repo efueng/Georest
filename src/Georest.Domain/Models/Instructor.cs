@@ -42,5 +42,6 @@ namespace Georest.Domain.Models
         private string _LastName;
 
         public ICollection<InstructorLab> Labs { get; set; }
+        public ICollection<Section> Sections { get; set; }
     }
 }
