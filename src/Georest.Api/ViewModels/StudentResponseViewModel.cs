@@ -10,10 +10,8 @@ namespace Georest.Api.ViewModels
     public class StudentResponseViewModel
     {
         public int Id { get; set; }
-        [Required]
         public string Body { get; set; }
         public int ExerciseId { get; set; }
-        [ForeignKey("ExerciseId")]
         public ExerciseViewModel Exercise { get; set; }
     }
 }

@@ -57,11 +57,16 @@ namespace Georest.Domain.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Body");
+                    b.Property<string>("Body")
+                        .IsRequired();
+
+                    b.Property<int>("ExerciseId");
 
                     b.Property<int?>("InstructorLabId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
 
                     b.HasIndex("InstructorLabId");
 
@@ -102,7 +107,8 @@ namespace Georest.Domain.Migrations
 
                     b.Property<int>("InstructorId");
 
-                    b.Property<string>("SectionString");
+                    b.Property<string>("SectionString")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -185,6 +191,11 @@ namespace Georest.Domain.Migrations
 
             modelBuilder.Entity("Georest.Domain.Models.InstructorResponse", b =>
                 {
+                    b.HasOne("Georest.Domain.Models.Exercise", "Exercise")
+                        .WithMany()
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Georest.Domain.Models.InstructorLab")
                         .WithMany("Responses")
                         .HasForeignKey("InstructorLabId");

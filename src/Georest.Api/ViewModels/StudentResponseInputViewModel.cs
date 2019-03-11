@@ -12,7 +12,6 @@ namespace Georest.Api.ViewModels
         [Required]
         public string Body { get; set; }
         public int ExerciseId { get; set; }
-        [ForeignKey("ExerciseId")]
         public ExerciseViewModel Exercise { get; set; }
     }
 }
