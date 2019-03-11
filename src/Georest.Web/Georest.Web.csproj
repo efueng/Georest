@@ -1,10 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
         <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-        <TypeScriptToolsVersion>3.3</TypeScriptToolsVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,8 +28,6 @@
     
     <ItemGroup>
         <TypeScriptCompile Include="scripts\main.ts" />
-        <TypeScriptCompile Include="wwwroot\js\LabDirectory.js" />
-        <TypeScriptCompile Include="wwwroot\js\LabUtils.js" />
     </ItemGroup>
 
 </Project>
