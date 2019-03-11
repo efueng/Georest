@@ -20,7 +20,7 @@ namespace Georest.Domain.Models
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("First name invalid for student.", nameof(value));
+                    throw new ArgumentException("First name is required for student.", nameof(value));
                 }
 
                 value = value.Trim();
@@ -37,7 +37,7 @@ namespace Georest.Domain.Models
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("Last name invalid for student.", nameof(value));
+                    throw new ArgumentException("Last name is required for student.", nameof(value));
                 }
 
                 value = value.Trim();

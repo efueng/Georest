@@ -1,0 +1,16 @@
+﻿<h1 class="heading is-size-4 is-bold">Users<br /></h1>
+<ul>
+    @if (ViewBag.Students.Count == 0)
+    {
+        <li>No Students</li>
+    }
+    @foreach (var student in ViewBag.Students)
+    {
+        <li>
+            @student.FirstName @student.LastName
+            <a class="button" asp-action="edit" asp-route-id="@student.Id">Edit</a>
+            <a class="button is-danger" asp-action="delete" asp-route-id="@student.Id" onclick="return confirm('Are you sure you want to delete @student.FirstName @student.LastName?')">Delete</a>
+        </li>
+    }
+</ul>
+<a asp-controller="Students" asp-action="Add" class="button is-primary">Add Student</a>

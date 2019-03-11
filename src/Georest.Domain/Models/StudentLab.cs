@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Georest.Domain.Models
 {
-    public class StudentLab : Entity
+    public class StudentLab : Lab
     {
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public Student Student { get; set; }
-        public List<StudentResponse> Responses { get; set; }
+        public ICollection<StudentResponse> Responses { get; set; }
     }
 }

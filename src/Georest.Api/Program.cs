@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Georest.Api.Models;
 using Georest.Domain.Models;
 using Serilog;
+using System.Reflection;
 
 namespace Georest.Api
 {
@@ -27,6 +28,7 @@ namespace Georest.Api
         public static void Main(string[] args)
         {
             CurrentDirectoryHelpers.SetCurrentDirectory();
+            //Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
             Serilog.Debugging.SelfLog.Enable(msg => Debug.WriteLine(msg));
 

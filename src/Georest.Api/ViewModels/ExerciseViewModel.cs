@@ -7,5 +7,7 @@ namespace Georest.Api.ViewModels
 {
     public class ExerciseViewModel
     {
+        public string Title { get; set; }
+        public string Body { get; set; }
     }
 }

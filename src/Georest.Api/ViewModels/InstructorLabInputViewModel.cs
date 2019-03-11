@@ -12,7 +12,7 @@ namespace Georest.Api.ViewModels
         public string Title { get; set; }
         public string DateTimeCreated { get; set; }
         public string DateTimePublished { get; set; }
-        public bool IsPublished { get; set; }
-        public bool IsOverridden { get; set; }
+        public List<ExerciseInputViewModel> Exercises { get; set; }
+        public List<InstructorResponseInputViewModel> Responses { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace Georest.Domain.Services
             return false;
         }
 
-        public async Task<List<Section>> GetAllSections()
+        public async Task<ICollection<Section>> GetAllSections()
         {
             return await DbContext.Sections.ToListAsync().ConfigureAwait(false);
         }
