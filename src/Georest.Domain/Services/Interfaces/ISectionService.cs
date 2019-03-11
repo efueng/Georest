@@ -11,7 +11,7 @@ namespace Georest.Domain.Services.Interfaces
         Task<Section> AddSection(Section section);
         Task<Section> GetById(int sectionId);
         Task<bool> DeleteSection(int sectionId);
-        Task<List<Section>> GetAllSections();
+        Task<ICollection<Section>> GetAllSections();
         Task<Section> UpdateSection(Section section);
     }
 }

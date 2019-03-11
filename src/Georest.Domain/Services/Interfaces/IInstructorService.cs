@@ -11,7 +11,7 @@ namespace Georest.Domain.Services.Interfaces
         Task<Instructor> AddInstructor(Instructor instructor);
         Task<Instructor> GetById(int intstructorId);
         Task<bool> DeleteInstructor(int intstructorId);
-        Task<List<Instructor>> GetAllInstructors();
+        Task<ICollection<Instructor>> GetAllInstructors();
         Task<Instructor> UpdateInstructor(Instructor intstructor);
     }
 }

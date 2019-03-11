@@ -11,7 +11,7 @@ namespace Georest.Domain.Services.Interfaces
         Task<Student> AddStudent(Student student);
         Task<Student> GetById(int studentId);
         Task<bool> DeleteStudent(int studentId);
-        Task<List<Student>> GetAllStudents();
+        Task<ICollection<Student>> GetAllStudents();
         Task<Student> UpdateStudent(Student student);
     }
 }

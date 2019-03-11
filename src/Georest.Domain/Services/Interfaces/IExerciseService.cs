@@ -11,7 +11,7 @@ namespace Georest.Domain.Services.Interfaces
         Task<Exercise> AddExercise(Exercise exercise);
         Task<Exercise> GetById(int exerciseId);
         Task<bool> DeleteExercise(int exerciseId);
-        Task<List<Exercise>> GetAllExercises();
+        Task<ICollection<Exercise>> GetAllExercises();
         Task<Exercise> UpdateExercise(Exercise exercise);
     }
 }

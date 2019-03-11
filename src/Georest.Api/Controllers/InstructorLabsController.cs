@@ -25,6 +25,14 @@ namespace Georest.Api.Controllers
             LabService = labService;
         }
 
+        // GET api/InstructorLabs
+        [HttpGet]
+        public async Task<ActionResult<ICollection<InstructorLabViewModel>>> GetAllLabs()
+        {
+            ICollection<InstructorLab> exercises = await LabService.GetAllLabs().ConfigureAwait(false);
+            return Ok(exercises.Select(x => Mapper.Map<InstructorLabViewModel>(x)));
+        }
+
         // GET: api/InstructorLabs/5
         [HttpGet("{id}")]
         public async Task<ActionResult> GetLabById(int id)

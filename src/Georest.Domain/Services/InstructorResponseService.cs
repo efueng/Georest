@@ -38,7 +38,7 @@ namespace Georest.Domain.Services
             return false;
         }
 
-        public async Task<List<InstructorResponse>> GetAllResponses()
+        public async Task<ICollection<InstructorResponse>> GetAllResponses()
         {
             return await DbContext.InstructorResponses.ToListAsync().ConfigureAwait(false);
         }

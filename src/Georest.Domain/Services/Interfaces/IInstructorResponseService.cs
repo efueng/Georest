@@ -11,7 +11,7 @@ namespace Georest.Domain.Services.Interfaces
         Task<InstructorResponse> AddResponse(InstructorResponse response);
         Task<InstructorResponse> GetById(int responseId);
         Task<bool> DeleteResponse(int responseId);
-        Task<List<InstructorResponse>> GetAllResponses();
+        Task<ICollection<InstructorResponse>> GetAllResponses();
         Task<InstructorResponse> UpdateResponse(InstructorResponse response);
     }
 }

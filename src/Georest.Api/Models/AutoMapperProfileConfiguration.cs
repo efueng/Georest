@@ -22,6 +22,7 @@ namespace Georest.Api.Models
             CreateMap<InstructorLabInputViewModel, InstructorLab>();
 
             CreateMap<InstructorResponse, InstructorResponseViewModel>();
+            CreateMap<InstructorResponseViewModel, InstructorResponse>();
             CreateMap<InstructorResponseInputViewModel, InstructorResponse>();
 
             CreateMap<Student, StudentViewModel>();
@@ -29,12 +30,15 @@ namespace Georest.Api.Models
             CreateMap<StudentInputViewModel, Student>();
 
             CreateMap<StudentLab, StudentLabViewModel>();
+            CreateMap<StudentLabViewModel, StudentLab>();
             CreateMap<StudentLabInputViewModel, StudentLab>();
 
             CreateMap<StudentResponse, StudentResponseViewModel>();
+            CreateMap<StudentResponseViewModel, StudentResponse>();
             CreateMap<StudentResponseInputViewModel, StudentResponse>();
 
             CreateMap<Exercise, ExerciseViewModel>();
+            CreateMap<ExerciseViewModel, Exercise>();
             CreateMap<ExerciseInputViewModel, Exercise>();
 
             CreateMap<Section, SectionViewModel>();

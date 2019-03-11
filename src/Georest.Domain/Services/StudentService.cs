@@ -38,7 +38,7 @@ namespace Georest.Domain.Services
             return false;
         }
 
-        public async Task<List<Student>> GetAllStudents()
+        public async Task<ICollection<Student>> GetAllStudents()
         {
             return await DbContext.Students.ToListAsync().ConfigureAwait(false);
         }

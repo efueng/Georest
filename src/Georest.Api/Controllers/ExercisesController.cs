@@ -25,6 +25,14 @@ namespace Georest.Api.Controllers
             ExerciseService = exerciseService;
         }
 
+        // GET api/Exercises
+        [HttpGet]
+        public async Task<ActionResult<ICollection<InstructorViewModel>>> GetAllExercises()
+        {
+            ICollection<Exercise> exercises = await ExerciseService.GetAllExercises().ConfigureAwait(false);
+            return Ok(exercises.Select(x => Mapper.Map<ExerciseViewModel>(x)));
+        }
+
         // GET: api/Exercises/5
         [HttpGet("{id}")]
         public async Task<ActionResult> GetExerciseById(int id)
