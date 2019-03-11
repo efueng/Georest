@@ -11,6 +11,6 @@ namespace Georest.Domain.Models
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public Student Student { get; set; }
-        public List<StudentResponse> Responses { get; set; }
+        public ICollection<StudentResponse> Responses { get; set; }
     }
 }
