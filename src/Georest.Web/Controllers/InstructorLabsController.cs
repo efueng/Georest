@@ -115,7 +115,7 @@ namespace Georest.Web.Controllers
                 try
                 {
                     var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                    await georestClient.DeleteInstructorLabAsync(id);
+                    await georestClient.DeleteLabAsync(id);
 
                     result = RedirectToAction(nameof(Index));
                 }
