@@ -93,7 +93,7 @@ namespace Georest.Web.Controllers
                     try
                     {
                         var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                        //await georestClient.UpdateExerciseAsync(viewModel.Id, Mapper.Map<ExerciseInputViewModel>(viewModel));
+                        await georestClient.UpdateExerciseAsync(viewModel.Id, Mapper.Map<ExerciseInputViewModel>(viewModel));
 
                         result = RedirectToAction(nameof(Index));
                     }
