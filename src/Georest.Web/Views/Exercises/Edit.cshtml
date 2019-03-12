@@ -4,7 +4,7 @@
 <form asp-route="Edit">
     <input asp-for="Id" type="hidden" />
     <div class="field">
-        <label class="label" asp-for="Title">Lab Title</label>
+        <label class="label" asp-for="Title">Exercise Title</label>
         <div class="control">
             <input class="input" type="text" asp-for="Title" />
         </div>
@@ -20,7 +20,7 @@
             <button class="button is-primary">Submit</button>
         </div>
         <div class="control">
-            <a asp-controller="Instructors" asp-action="Index" class="button is-light">Cancel</a>
+            <a asp-controller="Exercises" asp-action="Index" class="button is-light">Cancel</a>
         </div>
     </div>
 </form>

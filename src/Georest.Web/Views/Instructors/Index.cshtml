@@ -1,4 +1,4 @@
-﻿<h1 class="heading is-size-4 is-bold">Instructors<br /></h1>
+﻿<h1 class="heading is-size-3 is-bold">Instructors<br /></h1>
 <ul>
     @if (ViewBag.Instructors.Count == 0)
     {
@@ -7,7 +7,7 @@
     @foreach (var instructor in ViewBag.Instructors)
     {
         <li>
-            @instructor.FirstName @instructor.LastName
+            @instructor.FirstName @instructor.LastName ID:@instructor.Id
             <a class="button" asp-action="edit" asp-route-id="@instructor.Id">Edit</a>
             <a class="button is-danger" asp-action="delete" asp-route-id="@instructor.Id" onclick="return confirm('Are you sure you want to delete @instructor.FirstName @instructor.LastName?')">Delete</a>
         </li>

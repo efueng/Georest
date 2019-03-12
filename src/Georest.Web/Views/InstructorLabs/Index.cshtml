@@ -1,13 +1,13 @@
-﻿<h1 class="heading is-size-4 is-bold">Labs<br /></h1>
+﻿<h1 class="heading is-size-3 is-bold">Instructor Labs<br /></h1>
 <ul>
     @if (ViewBag.InstructorLabs.Count == 0)
     {
-        <li>No InstructorLabs</li>
+        <li>No Labs</li>
     }
     @foreach (var instructorLab in ViewBag.InstructorLabs)
     {
         <li>
-            @instructorLab.Title
+            <h1 class="heading is-size-4 is-bold">Lab:@instructorLab.Id @instructorLab.Title</h1>
             <a class="button" asp-action="edit" asp-route-id="@instructorLab.Id">Edit</a>
             <a class="button is-danger" asp-action="delete" asp-route-id="@instructorLab.Id" onclick="return confirm('Are you sure you want to delete the lab @instructorLab.Title?')">Delete</a>
         </li>

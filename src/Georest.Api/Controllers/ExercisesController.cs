@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Georest.Api.ViewModels;
 using Georest.Domain.Models;
-using Georest.Domain.Services;
 using Georest.Domain.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Georest.Api.Controllers
 {
@@ -29,14 +29,13 @@ namespace Georest.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<ICollection<ExerciseViewModel>>> GetAllExercises()
         {
-            ICollection<Exercise> exercises = await ExerciseService.GetAllExercises().ConfigureAwait(false);
+            var exercises = await ExerciseService.GetAllExercises();
             //return Ok(exercises.Select(x => Mapper.Map<ExerciseViewModel>(x)));
             return Ok(Mapper.Map<ICollection<ExerciseViewModel>>(exercises));
         }
 
-        // GET: api/Exercises/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Exercise>> GetExerciseById(int id)
+        public async Task<ActionResult<ExerciseViewModel>> GetExerciseById(int id)
         {
             Exercise fetchedExercise = await ExerciseService.GetById(id).ConfigureAwait(false);
             if (fetchedExercise == null)
@@ -49,7 +48,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/Exercises
         [HttpPost]
-        public async Task<ActionResult<Exercise>> AddExercise(ExerciseInputViewModel viewModel)
+        public async Task<ActionResult<ExerciseViewModel>> AddExercise(ExerciseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -57,12 +56,12 @@ namespace Georest.Api.Controllers
             }
 
             Exercise createdExercise = await ExerciseService.AddExercise(Mapper.Map<Exercise>(viewModel)).ConfigureAwait(false);
-            return CreatedAtAction(nameof(AddExercise), new { id = createdExercise.Id }, createdExercise);
+            return Ok(createdExercise);
         }
 
         // PUT: api/Exercises/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Exercise>> UpdateExercise(int id, ExerciseInputViewModel viewModel)
+        [HttpPut]
+        public async Task<ActionResult<ExerciseViewModel>> UpdateExercise(int id, ExerciseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
