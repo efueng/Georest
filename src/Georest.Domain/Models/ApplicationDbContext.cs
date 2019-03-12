@@ -13,7 +13,9 @@ namespace Georest.Domain.Models
         public DbSet<StudentResponse> StudentResponses { get; set; }
         public DbSet<Section> Sections { get; set; }
         public ApplicationDbContext(DbContextOptions options) : base(options)
-        {}
+        {
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
