@@ -30,14 +30,14 @@ namespace Georest.Api.Controllers
         public async Task<ActionResult<ICollection<StudentViewModel>>> GetAllStudents()
         {
             var students = await StudentService.GetAllStudents();
-            return Ok(students.Select(x => Mapper.Map<StudentViewModel>(x)));
+            //return Ok(students.Select(x => Mapper.Map<StudentViewModel>(x)));
+            return Ok(Mapper.Map<ICollection<StudentViewModel>>(students));
         }
 
-        // GET: api/Students/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult<StudentViewModel>> GetStudentById(int id)
         {
-            Student fetchedStudent = await  StudentService.GetById(id).ConfigureAwait(false);
+            Student fetchedStudent = await StudentService.GetById(id).ConfigureAwait(false);
             if (fetchedStudent == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/Students
         [HttpPost]
-        public async Task<ActionResult> Post(StudentViewModel viewModel)
+        public async Task<ActionResult<StudentViewModel>> AddStudent(StudentInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -56,12 +56,12 @@ namespace Georest.Api.Controllers
             }
 
             Student createdStudent = await StudentService.AddStudent(Mapper.Map<Student>(viewModel)).ConfigureAwait(false);
-            return CreatedAtAction(nameof(Post), new { id = createdStudent.Id }, Mapper.Map<StudentViewModel>(createdStudent));
+            return Ok(createdStudent);
         }
 
         // PUT: api/Students/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, StudentInputViewModel viewModel)
+        [HttpPut]
+        public async Task<ActionResult<StudentViewModel>> UpdateStudent(int id, StudentInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -80,7 +80,7 @@ namespace Georest.Api.Controllers
 
         // DELETE: api/Students/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> DeleteStudent(int id)
         {
             if (id <= 0)
             {

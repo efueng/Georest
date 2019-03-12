@@ -27,7 +27,7 @@ namespace Georest.Api.Controllers
 
         // GET: api/InstructorResponses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetResponseById(int id)
+        public async Task<ActionResult<InstructorResponseViewModel>> GetResponseById(int id)
         {
             InstructorResponse fetchedResponse = await ResponseService.GetById(id).ConfigureAwait(false);
             if (fetchedResponse == null)
@@ -40,7 +40,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/InstructorResponses
         [HttpPost]
-        public async Task<ActionResult> AddResponse(InstructorResponseViewModel viewModel)
+        public async Task<ActionResult<InstructorResponseViewModel>> AddResponse(InstructorResponseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -53,7 +53,7 @@ namespace Georest.Api.Controllers
 
         // PUT: api/InstructorResponses/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateResponse(int id, InstructorResponseInputViewModel viewModel)
+        public async Task<ActionResult<InstructorResponseViewModel>> UpdateResponse(int id, InstructorResponseInputViewModel viewModel)
         {
             if (viewModel == null)
             {

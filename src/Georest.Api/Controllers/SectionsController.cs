@@ -27,7 +27,7 @@ namespace Georest.Api.Controllers
 
         // GET: api/Sections/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetSectionById(int id)
+        public async Task<ActionResult<SectionViewModel>> GetSectionById(int id)
         {
             Section fetchedSection = await SectionService.GetById(id).ConfigureAwait(false);
             if (fetchedSection == null)
@@ -40,7 +40,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/Sections
         [HttpPost]
-        public async Task<ActionResult> AddSection(SectionViewModel viewModel)
+        public async Task<ActionResult<SectionViewModel>> AddSection(SectionInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -53,7 +53,7 @@ namespace Georest.Api.Controllers
 
         // PUT: api/Sections/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateSection(int id, SectionViewModel viewModel)
+        public async Task<ActionResult<SectionViewModel>> UpdateSection(int id, SectionInputViewModel viewModel)
         {
             if (viewModel == null)
             {

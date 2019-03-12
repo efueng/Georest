@@ -27,15 +27,16 @@ namespace Georest.Api.Controllers
 
         // GET api/Exercises
         [HttpGet]
-        public async Task<ActionResult<ICollection<InstructorViewModel>>> GetAllExercises()
+        public async Task<ActionResult<ICollection<ExerciseViewModel>>> GetAllExercises()
         {
             ICollection<Exercise> exercises = await ExerciseService.GetAllExercises().ConfigureAwait(false);
-            return Ok(exercises.Select(x => Mapper.Map<ExerciseViewModel>(x)));
+            //return Ok(exercises.Select(x => Mapper.Map<ExerciseViewModel>(x)));
+            return Ok(Mapper.Map<ICollection<ExerciseViewModel>>(exercises));
         }
 
         // GET: api/Exercises/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetExerciseById(int id)
+        public async Task<ActionResult<Exercise>> GetExerciseById(int id)
         {
             Exercise fetchedExercise = await ExerciseService.GetById(id).ConfigureAwait(false);
             if (fetchedExercise == null)
@@ -48,7 +49,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/Exercises
         [HttpPost]
-        public async Task<ActionResult> AddExercise(ExerciseViewModel viewModel)
+        public async Task<ActionResult<Exercise>> AddExercise(ExerciseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -56,12 +57,12 @@ namespace Georest.Api.Controllers
             }
 
             Exercise createdExercise = await ExerciseService.AddExercise(Mapper.Map<Exercise>(viewModel)).ConfigureAwait(false);
-            return CreatedAtAction(nameof(AddExercise), new { id = createdExercise.Id }, Mapper.Map<ExerciseViewModel>(createdExercise));
+            return CreatedAtAction(nameof(AddExercise), new { id = createdExercise.Id }, createdExercise);
         }
 
         // PUT: api/Exercises/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateExercise(int id, ExerciseInputViewModel viewModel)
+        public async Task<ActionResult<Exercise>> UpdateExercise(int id, ExerciseInputViewModel viewModel)
         {
             if (viewModel == null)
             {

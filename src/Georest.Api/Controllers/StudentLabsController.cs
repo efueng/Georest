@@ -27,7 +27,7 @@ namespace Georest.Api.Controllers
 
         // GET: api/StudentLabs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetLabById(int id)
+        public async Task<ActionResult<StudentLabViewModel>> GetLabById(int id)
         {
             StudentLab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
             if (fetchedLab == null)
@@ -35,12 +35,12 @@ namespace Georest.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(Mapper.Map<InstructorLabViewModel>(fetchedLab));
+            return Ok(Mapper.Map<StudentLabViewModel>(fetchedLab));
         }
 
         // POST: api/StudentLabs
         [HttpPost]
-        public async Task<ActionResult> AddLab(StudentLabViewModel viewModel)
+        public async Task<ActionResult<StudentLabViewModel>> AddLab(StudentLabInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -53,7 +53,7 @@ namespace Georest.Api.Controllers
 
         // PUT: api/StudentLabs/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateLab(int id, InstructorLabInputViewModel viewModel)
+        public async Task<ActionResult<StudentLabViewModel>> UpdateLab(int id, InstructorLabInputViewModel viewModel)
         {
             if (viewModel == null)
             {

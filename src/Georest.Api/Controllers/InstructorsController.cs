@@ -30,11 +30,12 @@ namespace Georest.Api.Controllers
         public async Task<ActionResult<ICollection<InstructorViewModel>>> GetAllInstructors()
         {
             var instructors = await InstructorService.GetAllInstructors();
-            return Ok(instructors.Select(x => Mapper.Map<InstructorViewModel>(x)));
+            //return Ok(instructors.Select(x => Mapper.Map<InstructorViewModel>(x)));
+            return Ok(Mapper.Map<ICollection<InstructorViewModel>>(instructors));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetInstructorById(int id)
+        public async Task<ActionResult<InstructorViewModel>> GetInstructorById(int id)
         {
             Instructor fetchedInstructor = await InstructorService.GetById(id).ConfigureAwait(false);
             if (fetchedInstructor == null)
@@ -47,7 +48,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/Instructors
         [HttpPost]
-        public async Task<ActionResult<InstructorViewModel>> AddInstructor(InstructorViewModel viewModel)
+        public async Task<ActionResult<InstructorViewModel>> AddInstructor(InstructorInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -55,12 +56,12 @@ namespace Georest.Api.Controllers
             }
 
             Instructor createdInstructor = await InstructorService.AddInstructor(Mapper.Map<Instructor>(viewModel)).ConfigureAwait(false);
-            return CreatedAtAction(nameof(AddInstructor), new { id = createdInstructor.Id }, Mapper.Map<InstructorViewModel>(createdInstructor));
+            return Ok(createdInstructor);
         }
 
         // PUT: api/Instructors/5
         [HttpPut]
-        public async Task<ActionResult> UpdateInstructor(int id, InstructorInputViewModel viewModel)
+        public async Task<ActionResult<InstructorViewModel>> UpdateInstructor(int id, InstructorInputViewModel viewModel)
         {
             if (viewModel == null)
             {

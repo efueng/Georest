@@ -27,7 +27,7 @@ namespace Georest.Api.Controllers
 
         // GET: api/StudentResponses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetResponseById(int id)
+        public async Task<ActionResult<StudentResponseViewModel>> GetResponseById(int id)
         {
             StudentResponse fetchedResponse = await ResponseService.GetById(id).ConfigureAwait(false);
             if (fetchedResponse == null)
@@ -35,12 +35,12 @@ namespace Georest.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(Mapper.Map<InstructorResponseViewModel>(fetchedResponse));
+            return Ok(Mapper.Map<StudentResponseViewModel>(fetchedResponse));
         }
 
         // POST: api/StudentResponses
         [HttpPost]
-        public async Task<ActionResult> AddResponse(StudentResponseViewModel viewModel)
+        public async Task<ActionResult<StudentResponseViewModel>> AddResponse(StudentResponseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -53,7 +53,7 @@ namespace Georest.Api.Controllers
 
         // PUT: api/StudentResponses/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateResponse(int id, InstructorResponseInputViewModel viewModel)
+        public async Task<ActionResult<StudentResponseViewModel>> UpdateResponse(int id, StudentResponseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
