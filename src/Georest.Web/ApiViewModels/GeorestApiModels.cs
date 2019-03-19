@@ -3752,6 +3752,12 @@ namespace Georest.Web.ApiViewModels
         [Newtonsoft.Json.JsonProperty("isOverridden", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? IsOverridden { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("instructorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? InstructorId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("exerciseIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<int> ExerciseIds { get; set; }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -3776,6 +3782,12 @@ namespace Georest.Web.ApiViewModels
         [Newtonsoft.Json.JsonProperty("body", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Body { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("exerciseId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? ExerciseId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("exercise", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ExerciseViewModel Exercise { get; set; }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -3798,6 +3810,9 @@ namespace Georest.Web.ApiViewModels
         [Newtonsoft.Json.JsonProperty("body", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Body { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("exerciseId", Required = Newtonsoft.Json.Required.Always)]
+        public int ExerciseId { get; set; }
     
         public string ToJson() 
         {
@@ -3822,6 +3837,9 @@ namespace Georest.Web.ApiViewModels
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string LastName { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("instructorId", Required = Newtonsoft.Json.Required.Always)]
+        public int InstructorId { get; set; }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -3840,8 +3858,8 @@ namespace Georest.Web.ApiViewModels
         [Newtonsoft.Json.JsonProperty("sectionString", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SectionString { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("instructor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Instructor Instructor { get; set; }
+        [Newtonsoft.Json.JsonProperty("instructorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? InstructorId { get; set; }
     
         public string ToJson() 
         {
@@ -3856,117 +3874,14 @@ namespace Georest.Web.ApiViewModels
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.22.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Instructor 
-    {
-        [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string FirstName { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string LastName { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("labs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<InstructorLab> Labs { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("sections", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Section> Sections { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-    
-        public static Instructor FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Instructor>(data);
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.22.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class InstructorLab 
-    {
-        [Newtonsoft.Json.JsonProperty("instructorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? InstructorId { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("instructor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Instructor Instructor { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("responses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<InstructorResponse> Responses { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Title { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("isPublished", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsPublished { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("createdOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedOn { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("publishedOn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? PublishedOn { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("exercises", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Exercise> Exercises { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-    
-        public static InstructorLab FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<InstructorLab>(data);
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.22.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Section 
-    {
-        [Newtonsoft.Json.JsonProperty("sectionString", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string SectionString { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("instructorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? InstructorId { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("instructor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Instructor Instructor { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-    
-        public static Section FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Section>(data);
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.22.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SectionInputViewModel 
     {
         [Newtonsoft.Json.JsonProperty("sectionString", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string SectionString { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("instructor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Instructor Instructor { get; set; }
+        [Newtonsoft.Json.JsonProperty("instructorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? InstructorId { get; set; }
     
         public string ToJson() 
         {
@@ -4060,6 +3975,9 @@ namespace Georest.Web.ApiViewModels
     
         [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LastName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("studentLabs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<StudentLabViewModel> StudentLabs { get; set; }
     
         public string ToJson() 
         {
@@ -4166,6 +4084,12 @@ namespace Georest.Web.ApiViewModels
         [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string LastName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("instructorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? InstructorId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("instructor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public InstructorInputViewModel Instructor { get; set; }
     
         public string ToJson() 
         {

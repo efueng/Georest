@@ -14,5 +14,8 @@ namespace Georest.Api.ViewModels
         public string DateTimePublished { get; set; }
         public bool IsPublished { get; set; }
         public bool IsOverridden { get; set; }
+        public int InstructorId { get; set; }
+        public ICollection<int> ExerciseIds { get; set; }
+
     }
 }

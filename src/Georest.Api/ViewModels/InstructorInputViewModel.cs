@@ -12,5 +12,7 @@ namespace Georest.Api.ViewModels
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        [Required]
+        public int InstructorId { get; set; }
     }
 }

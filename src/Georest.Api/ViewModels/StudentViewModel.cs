@@ -11,5 +11,6 @@ namespace Georest.Api.ViewModels
         public SectionViewModel Section { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public ICollection<StudentLabViewModel> StudentLabs { get; set; }
     }
 }

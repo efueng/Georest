@@ -15,6 +15,7 @@ namespace Georest.Api.Models
             CreateMap<Instructor, InstructorViewModel>();
             CreateMap<InstructorViewModel, Instructor>();
             CreateMap<InstructorViewModel, InstructorInputViewModel>();
+            CreateMap<InstructorInputViewModel, InstructorViewModel>();
             CreateMap<InstructorInputViewModel, Instructor>();
 
             CreateMap<InstructorLab, InstructorLabViewModel>();
@@ -43,6 +44,7 @@ namespace Georest.Api.Models
 
             CreateMap<Section, SectionViewModel>();
             CreateMap<SectionViewModel, Section>();
+            CreateMap<SectionInputViewModel, Section>();
         }
     }
 }
