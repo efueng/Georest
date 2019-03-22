@@ -41,11 +41,6 @@ namespace Georest.Domain.Services
             return false;
         }
 
-        public async Task<ICollection<InstructorLab>> GetAllLabs()
-        {
-            return await DbContext.InstructorLabs.ToListAsync().ConfigureAwait(false);
-        }
-
         public async Task<InstructorLab> GetById(int labId)
         {
             InstructorLab fetchedLab = await DbContext.InstructorLabs.SingleOrDefaultAsync(lab => lab.Id == labId).ConfigureAwait(false);
@@ -56,8 +51,6 @@ namespace Georest.Domain.Services
         public async Task<ICollection<InstructorLab>> GetLabsForInstructor(int instructorId)
         {
             return (await DbContext.Instructors.FindAsync(instructorId).ConfigureAwait(false)).Labs;
-
-            //return await DbContext.Labs.Where(lab => lab.s)
         }
 
         public async Task<InstructorLab> UpdateLab(InstructorLab lab)

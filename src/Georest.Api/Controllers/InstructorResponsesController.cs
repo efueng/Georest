@@ -27,7 +27,7 @@ namespace Georest.Api.Controllers
 
         // GET: api/InstructorResponses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<InstructorResponseViewModel>> GetResponseById(int id)
+        public async Task<ActionResult<InstructorResponseViewModel>> GetInstructorResponseById(int id)
         {
             InstructorResponse fetchedResponse = await ResponseService.GetById(id).ConfigureAwait(false);
             if (fetchedResponse == null)
@@ -38,9 +38,18 @@ namespace Georest.Api.Controllers
             return Ok(Mapper.Map<InstructorResponseViewModel>(fetchedResponse));
         }
 
+        // GET: api/InstructorResponses
+        [HttpGet]
+        public async Task<ActionResult<InstructorResponseViewModel>> GetAllInstructorResponses()
+        {
+            ICollection<InstructorResponse> responses = await ResponseService.GetAllResponses().ConfigureAwait(false);
+
+            return Ok(Mapper.Map<InstructorResponseViewModel>(responses));
+        }
+
         // POST: api/InstructorResponses
         [HttpPost]
-        public async Task<ActionResult<InstructorResponseViewModel>> AddResponse(InstructorResponseInputViewModel viewModel)
+        public async Task<ActionResult<InstructorResponseViewModel>> AddInstructorResponse(InstructorResponseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -48,12 +57,12 @@ namespace Georest.Api.Controllers
             }
 
             InstructorResponse createdResponse = await ResponseService.AddResponse(Mapper.Map<InstructorResponse>(viewModel)).ConfigureAwait(false);
-            return CreatedAtAction(nameof(AddResponse), new { id = createdResponse.Id }, Mapper.Map<InstructorResponseViewModel>(createdResponse));
+            return CreatedAtAction(nameof(AddInstructorResponse), new { id = createdResponse.Id }, Mapper.Map<InstructorResponseViewModel>(createdResponse));
         }
 
         // PUT: api/InstructorResponses/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<InstructorResponseViewModel>> UpdateResponse(int id, InstructorResponseInputViewModel viewModel)
+        public async Task<ActionResult<InstructorResponseViewModel>> UpdateInstructorResponse(int id, InstructorResponseInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -72,7 +81,7 @@ namespace Georest.Api.Controllers
 
         // DELETE: api/InstructorResponses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteResponse(int id)
+        public async Task<ActionResult> DeleteInstructorResponse(int id)
         {
             if (id <= 0)
             {

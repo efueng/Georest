@@ -30,7 +30,7 @@ namespace Georest.Api.Controllers
         public async Task<ActionResult<ICollection<ExerciseViewModel>>> GetAllExercises()
         {
             var exercises = await ExerciseService.GetAllExercises();
-            //return Ok(exercises.Select(x => Mapper.Map<ExerciseViewModel>(x)));
+            
             return Ok(Mapper.Map<ICollection<ExerciseViewModel>>(exercises));
         }
 

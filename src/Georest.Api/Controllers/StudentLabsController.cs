@@ -27,7 +27,7 @@ namespace Georest.Api.Controllers
 
         // GET: api/StudentLabs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<StudentLabViewModel>> GetLabById(int id)
+        public async Task<ActionResult<StudentLabViewModel>> GetStudentLabById(int id)
         {
             StudentLab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
             if (fetchedLab == null)
@@ -38,9 +38,17 @@ namespace Georest.Api.Controllers
             return Ok(Mapper.Map<StudentLabViewModel>(fetchedLab));
         }
 
+        // GET api/InstructorLabs/5
+        [HttpGet("{studentId}")]
+        public async Task<ActionResult<ICollection<StudentLabViewModel>>> GetLabsForStudent(int studentId)
+        {
+            ICollection<StudentLab> labs = await LabService.GetLabsForStudent(studentId).ConfigureAwait(false);
+            return Ok(Mapper.Map<StudentLabViewModel>(labs));
+        }
+
         // POST: api/StudentLabs
         [HttpPost]
-        public async Task<ActionResult<StudentLabViewModel>> AddLab(StudentLabInputViewModel viewModel)
+        public async Task<ActionResult<StudentLabViewModel>> AddStudentLab(StudentLabInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -48,12 +56,12 @@ namespace Georest.Api.Controllers
             }
 
             StudentLab createdLab = await LabService.AddLab(Mapper.Map<StudentLab>(viewModel)).ConfigureAwait(false);
-            return CreatedAtAction(nameof(AddLab), new {id = createdLab.Id}, Mapper.Map<StudentLabViewModel>(createdLab));
+            return CreatedAtAction(nameof(AddStudentLab), new {id = createdLab.Id}, Mapper.Map<StudentLabViewModel>(createdLab));
         }
 
         // PUT: api/StudentLabs/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<StudentLabViewModel>> UpdateLab(int id, InstructorLabInputViewModel viewModel)
+        [HttpPut]
+        public async Task<ActionResult<StudentLabViewModel>> UpdatStudentLab(int id, StudentLabInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -72,7 +80,7 @@ namespace Georest.Api.Controllers
 
         // DELETE: api/StudentLabs/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteLab(int id)
+        public async Task<ActionResult> DeleteStudentLab(int id)
         {
             if (id <= 0)
             {

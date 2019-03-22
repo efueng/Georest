@@ -25,6 +25,15 @@ namespace Georest.Api.Controllers
             SectionService = sectionService;
         }
 
+        // GET api/Sections
+        [HttpGet]
+        public async Task<ActionResult<ICollection<SectionViewModel>>> GetAllSections()
+        {
+            var sections = await SectionService.GetAllSections();
+
+            return Ok(Mapper.Map<ICollection<SectionViewModel>>(sections));
+        }
+
         // GET: api/Sections/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SectionViewModel>> GetSectionById(int id)

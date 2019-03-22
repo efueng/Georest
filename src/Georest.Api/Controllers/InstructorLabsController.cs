@@ -25,17 +25,17 @@ namespace Georest.Api.Controllers
             LabService = labService;
         }
 
-        // GET api/InstructorLabs
-        [HttpGet]
-        public async Task<ActionResult<ICollection<InstructorLabViewModel>>> GetAllLabs()
+        // GET api/InstructorLabs/5
+        [HttpGet("{instructorId}")]
+        public async Task<ActionResult<ICollection<InstructorLabViewModel>>> GetLabsForInstructor(int instructorId)
         {
-            ICollection<InstructorLab> exercises = await LabService.GetAllLabs().ConfigureAwait(false);
-            return Ok(exercises.Select(x => Mapper.Map<InstructorLabViewModel>(x)));
+            ICollection<InstructorLab> exercises = await LabService.GetLabsForInstructor(instructorId).ConfigureAwait(false);
+            return Ok(Mapper.Map<InstructorLabViewModel>(exercises));
         }
 
         // GET: api/InstructorLabs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<InstructorLabViewModel>> GetLabById(int id)
+        public async Task<ActionResult<InstructorLabViewModel>> GetInstructorLabById(int id)
         {
             InstructorLab fetchedLab = await LabService.GetById(id).ConfigureAwait(false);
             if (fetchedLab == null)
@@ -48,7 +48,7 @@ namespace Georest.Api.Controllers
 
         // POST: api/InstructorLabs
         [HttpPost]
-        public async Task<ActionResult<InstructorLabViewModel>> AddLab(InstructorLabInputViewModel viewModel)
+        public async Task<ActionResult<InstructorLabViewModel>> AddInstructorLab(InstructorLabInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -56,13 +56,13 @@ namespace Georest.Api.Controllers
             }
 
             InstructorLab createdLab = await LabService.AddLab(Mapper.Map<InstructorLab>(viewModel)).ConfigureAwait(false);
-            //return CreatedAtAction(nameof(AddLab), new { id = createdLab.Id }, Mapper.Map<InstructorLabViewModel>(createdLab));
+            //return CreatedAtAction(nameof(AddStudentLab), new { id = createdLab.Id }, Mapper.Map<InstructorLabViewModel>(createdLab));
             return Ok(createdLab);
         }
 
         // PUT: api/InstructorLabs/5
         [HttpPut]
-        public async Task<ActionResult<InstructorLabViewModel>> UpdateLab(int id, InstructorLabInputViewModel viewModel)
+        public async Task<ActionResult<InstructorLabViewModel>> UpdateInstructorLab(int id, InstructorLabInputViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -81,7 +81,7 @@ namespace Georest.Api.Controllers
 
         // DELETE: api/InstructorLabs/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteLab(int id)
+        public async Task<ActionResult> DeleteInstructorLab(int id)
         {
             if (id <= 0)
             {

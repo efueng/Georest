@@ -12,12 +12,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using Georest.Api.Models;
 
 namespace Georest.Api.Tests.Controllers
 {
     [TestClass]
     public class InstructorsControllerTests
     {
+        [AssemblyInitialize]
+        public static void ConfigureAutoMapper(TestContext context)
+        {
+            Mapper.Initialize(cfg => cfg.AddProfile(new AutoMapperProfileConfiguration()));
+        }
+
         private CustomWebApplicationFactory<Startup> Factory { get; set; }
 
         [TestInitialize]
@@ -81,18 +88,19 @@ namespace Georest.Api.Tests.Controllers
             };
 
             var service = new Mock<IInstructorService>();
-            //service.Setup(x => x.AddInstructor(It.Is<Instructor>(g => g.Name == instructor.Name)))
-            //    .Returns(Task.FromResult(new Instructor
-            //    {
-            //        Id = 2,
-            //        Name = instructor.Name
-            //    }))
-            //    .Verifiable();
+            service.Setup(x => x.AddInstructor(It.Is<Instructor>(g => g.FirstName == instructor.FirstName)))
+                .Returns(Task.FromResult(new Instructor
+                {
+                    Id = 2,
+                    FirstName = instructor.FirstName,
+                    LastName = instructor.LastName
+                }))
+                .Verifiable();
 
             var controller = new InstructorsController(service.Object, Mapper.Instance);
 
-            var result = (await controller.AddInstructor(instructor)).Result as CreatedAtActionResult;
-            var resultValue = result.Value as InstructorViewModel;
+            var result = (await controller.AddInstructor(instructor)).Result as OkObjectResult;
+            Instructor resultValue = (Instructor) result.Value;
 
             Assert.IsNotNull(resultValue);
             Assert.AreEqual(2, resultValue.Id);

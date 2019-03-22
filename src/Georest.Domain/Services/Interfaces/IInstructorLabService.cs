@@ -14,6 +14,5 @@ namespace Georest.Domain.Services.Interfaces
         Task<bool> DeleteLab(int labId);
         Task<ICollection<InstructorLab>> GetLabsForInstructor(int instructorId);
         Task<InstructorLab> UpdateLab(InstructorLab lab);
-        Task<ICollection<InstructorLab>> GetAllLabs();
     }
 }

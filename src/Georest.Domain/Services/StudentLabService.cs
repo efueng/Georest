@@ -51,8 +51,6 @@ namespace Georest.Domain.Services
         public async Task<ICollection<StudentLab>> GetLabsForStudent(int studentId)
         {
             return (await DbContext.Students.FindAsync(studentId).ConfigureAwait(false)).Labs;
-
-            //return await DbContext.Labs.Where(lab => lab.s)
         }
 
         public async Task<StudentLab> UpdateLab(StudentLab lab)

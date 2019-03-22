@@ -11,21 +11,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Georest.Web.Controllers
 {
-    public class InstructorLabsController : Controller
+    public class InstructorResponsesController : Controller
     {
         private IHttpClientFactory ClientFactory { get; }
         private IMapper Mapper { get; }
-        public InstructorLabsController(IHttpClientFactory clientFactory, IMapper mapper)
+        public InstructorResponsesController(IHttpClientFactory clientFactory, IMapper mapper)
         {
             ClientFactory = clientFactory;
             Mapper = mapper;
         }
-        public async Task<IActionResult> Index(int instructoId)
+        public async Task<IActionResult> Index(int instructorId)
         {
             using (var httpClient = ClientFactory.CreateClient("GeorestApi"))
             {
                 var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                ViewBag.InstructorLabs = await georestClient.GetLabsForInstructorAsync(instructoId);
+                ViewBag.InstructorResponses = await georestClient.GetAllInstructorResponsesAsync();
             }
             return View();
         }
@@ -36,7 +36,7 @@ namespace Georest.Web.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Add(InstructorLabInputViewModel viewModel)
+        public async Task<IActionResult> Add(InstructorResponseInputViewModel viewModel)
         {
             IActionResult result = View();
 
@@ -47,9 +47,9 @@ namespace Georest.Web.Controllers
                     try
                     {
                         var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                        await georestClient.AddInstructorLabAsync(viewModel);
+                        await georestClient.AddInstructorResponseAsync(viewModel);
 
-                        result = RedirectToAction(nameof(Index), viewModel.InstructorId);
+                        result = RedirectToAction(nameof(Index));
                     }
                     catch (SwaggerException se)
                     {
@@ -64,25 +64,25 @@ namespace Georest.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            InstructorLabViewModel fetchedInstructorLab = null;
+            InstructorResponseViewModel fetchedInstructorResponse = null;
 
             using (var httpClient = ClientFactory.CreateClient("GeorestApi"))
             {
                 try
                 {
                     var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                    fetchedInstructorLab = await georestClient.GetInstructorLabByIdAsync(id);
+                    fetchedInstructorResponse = await georestClient.GetInstructorResponseByIdAsync(id);
                 }
                 catch (SwaggerException se)
                 {
                     ModelState.AddModelError("", se.Message);
                 }
             }
-            return View(fetchedInstructorLab);
+            return View(fetchedInstructorResponse);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(InstructorLabViewModel viewModel)
+        public async Task<IActionResult> Edit(InstructorResponseViewModel viewModel)
         {
             IActionResult result = View();
 
@@ -93,9 +93,9 @@ namespace Georest.Web.Controllers
                     try
                     {
                         var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                        await georestClient.UpdateInstructorLabAsync(viewModel.Id, Mapper.Map<InstructorLabInputViewModel>(viewModel));
+                        await georestClient.UpdateInstructorResponseAsync((int)viewModel.Id, Mapper.Map<InstructorResponseInputViewModel>(viewModel));
 
-                        result = RedirectToAction(nameof(Index), viewModel.InstructorId);
+                        result = RedirectToAction(nameof(Index));
                     }
                     catch (SwaggerException se)
                     {
@@ -115,10 +115,9 @@ namespace Georest.Web.Controllers
                 try
                 {
                     var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                    int? instructorId = (await georestClient.GetInstructorLabByIdAsync(id).ConfigureAwait(false)).InstructorId;
-                    await georestClient.DeleteInstructorLabAsync(id);
+                    await georestClient.DeleteInstructorResponseAsync(id);
 
-                    result = RedirectToAction(nameof(Index), instructorId);
+                    result = RedirectToAction(nameof(Index));
                 }
                 catch (SwaggerException se)
                 {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace Georest.Api.Tests
                 var serviceProvider = new ServiceCollection()
                     .AddEntityFrameworkSqlite()
                     .BuildServiceProvider();
+
 
                 var connection = new SqliteConnection("Data Source=:memory:");
                 connection.Open();

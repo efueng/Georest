@@ -55,6 +55,9 @@ namespace Georest.Api
             services.AddAntiforgery(options => options.HeaderName = "XSRF-TOKEN");
             services.AddAntiforgery(options => options.SuppressXFrameOptionsHeader = true);
 
+            /// <summary>
+            ///     Georest.Domain ervices used by Georest.Api controllers can be scoped here
+            /// </summary>
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentLabService, StudentLabService>();
             services.AddScoped<IStudentResponseService, StudentResponseService>();

@@ -9,6 +9,7 @@ namespace Georest.Api.ViewModels
 {
     public class SectionViewModel
     {
+        public int Id { get; set; }
         public string SectionString { get; set; }
         public int InstructorId { get; set; }
     }

@@ -29,8 +29,8 @@ namespace Georest.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<ICollection<InstructorViewModel>>> GetAllInstructors()
         {
-            var instructors = await InstructorService.GetAllInstructors();
-            //return Ok(instructors.Select(x => Mapper.Map<InstructorViewModel>(x)));
+            var instructors = await InstructorService.GetAllInstructors().ConfigureAwait(false);
+            
             return Ok(Mapper.Map<ICollection<InstructorViewModel>>(instructors));
         }
 

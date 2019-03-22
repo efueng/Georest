@@ -10,6 +10,8 @@ namespace Georest.Api.ViewModels
     {
         [Required]
         public string Title { get; set; }
+        [Required]
+        public int StudentId { get; set; }
         public string DateTimeCreated { get; set; }
         public string DateTimePublished { get; set; }
         public bool IsPublished { get; set; }
