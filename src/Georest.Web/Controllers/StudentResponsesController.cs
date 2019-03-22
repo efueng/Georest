@@ -25,7 +25,7 @@ namespace Georest.Web.Controllers
             using (var httpClient = ClientFactory.CreateClient("GeorestApi"))
             {
                 var georestClient = new GeorestClient(httpClient.BaseAddress.ToString(), httpClient);
-                //ViewBag.StudentResponses = await georestClient.ge;
+                ViewBag.StudentResponses = await georestClient.GetAllStudentResponsesAsync().ConfigureAwait(false);
             }
             return View();
         }

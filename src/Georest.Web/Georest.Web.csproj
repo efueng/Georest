@@ -19,6 +19,9 @@
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="8.0.0" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="LtiLibrary.AspNetCore" Version="3.1.1" />
+        <PackageReference Include="LtiLibrary.Core" Version="1.6.2" />
+        <PackageReference Include="LtiLibrary.NetCore" Version="3.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
@@ -26,6 +29,7 @@
         <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
         <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
         <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
     </ItemGroup>
     
     <ItemGroup>

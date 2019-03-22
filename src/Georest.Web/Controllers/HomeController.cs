@@ -19,6 +19,5 @@ namespace Georest.Web.Controllers
         {
             return View();
         }
-
     }
 }
